@@ -82,7 +82,8 @@ img { display: block; max-width: 100%; height: auto; }
   align-items: center;
   justify-content: flex-end;
   padding: clamp(20px, 3vw, 28px) var(--gutter) 0;
-  gap: clamp(18px, 4vw, 40px);
+  --stack-gap: clamp(18px, 4vw, 40px);
+  gap: var(--stack-gap);
   overflow-x: clip; /* the zoomed skyline can be wider than a phone screen */
 }
 
@@ -93,12 +94,15 @@ img { display: block; max-width: 100%; height: auto; }
 
 .owl {
   width: min(664px, 92%);
-  margin-block: auto; /* keeps the owl centred in the open space */
+  margin-top: auto; /* any spare height goes above the owl, so it stays perched on the skyline */
 }
 
 .skyline {
   width: min(979px, 100%);
   margin-bottom: -1px; /* sit flush on the footer */
+  /* Tuck up under the owl: the middle of the skyline image is open sky, so the owl's
+     point drops into it. 8% of the skyline's width ≈ 28% of its height. */
+  margin-top: calc(-1 * var(--stack-gap) - min(979px, 100%) * 0.08);
   mix-blend-mode: multiply; /* white background drops out, so the growing skyline never covers the owl */
 }
 
